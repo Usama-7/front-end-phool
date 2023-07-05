@@ -36,80 +36,68 @@ const Navbar = () => {
     
   };
 
-  const toggleOffcanvasMenu = () => {
-    setOffcanvasMenuOpen(!isOffcanvasMenuOpen);
-  };
+  // const toggleOffcanvasMenu = () => {
+  //   setOffcanvasMenuOpen(!isOffcanvasMenuOpen);
+  // };
 
   return (
     <>
-      <header className={`site-navbar ${isOffcanvasMenuOpen ? 'offcanvas-menu' : ''}`} role="banner">
-        <div className="site-navbar-top">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-                <form action className="site-block-top-search">
-                  <span className="icon icon-search2" />
-                  <input type="text" className="form-control border-0" placeholder="Search" />
-                </form>
-              </div>
-              <div className="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
-                <div className="site-logo">
-                  <a href="index.html" className="js-logo-clone">Phoolkarian</a>
-                </div>
-              </div>
-              <div className="col-6 col-md-4 order-3 order-md-3 text-right">
-                <div className="site-top-icons">
-                  <ul>
-                    {auth ?
-                      <li><Link to="/login" onClick={logout}><span className="icon icon-person" />logout {JSON.parse(auth).name}</Link></li>
+
+
+
+<nav className="navbar navbar-expand-lg navbar-light bg-light">
+  <div className="container-fluid">
+    <a className="navbar-brand" href="#">Phoolkarian</a>
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon" />
+    </button>
+    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+      <li className="nav-item">
+                <Link className="nav-link" to="/">Home</Link>
+                
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/products">Products</Link>
+                
+              </li>
+              <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
+
+              {auth && JSON.parse(auth).role === 1 && (
+                <>
+                  <li className="nav-item"><Link className="nav-link" to="/adminAddProducts">AddProduct</Link></li>
+                  <li className="nav-item"><Link className="nav-link" to="/adminProductsList">Product List</Link></li>
+                  <li className="nav-item"><Link className="nav-link" to="/userlist">Users List</Link></li>
+                  <li className="nav-item"><Link className="nav-link" to="/messages">Messages</Link></li>
+                  <li className="nav-item"><Link className="nav-link" to="/purchaserequest">Purchase Request</Link></li>
+
+                </>
+              )}
+
+{auth ?
+                      <li><Link className="nav-link" to="/login" onClick={logout}><span className="icon icon-person" />logout {JSON.parse(auth).name}</Link></li>
                       :
-                      <li><Link to="/login"><span className="icon icon-person" />Login</Link></li>
+                      <li><Link className="nav-link" to="/login"><span className="icon icon-person" />Login</Link></li>
                     }
-                    <li><a href="#"><span className="icon icon-heart-o" /></a></li>
                     <li>
-                      <Link to="/cart" className="site-cart">
+                      <Link  to="/cart" className="site-cart nav-link">
                         <span className="icon icon-shopping_cart" />
                         <span className="count">{getdata.length}</span>
                       </Link>
                     </li>
-                    <li className="d-inline-block d-md-none ml-md-0">
-                      <a href="#" className={`site-menu-toggle js-menu-toggle ${isOffcanvasMenuOpen ? 'active' : ''}`} onClick={toggleOffcanvasMenu}>
-                        <span className="icon-menu" />
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <nav className="site-navigation text-right text-md-center" role="navigation">
-          <div className="container">
-            <ul className="site-menu js-clone-nav d-none d-md-block">
-              <li className=" ">
-                <Link to="/">Home</Link>
-                
-              </li>
-              <li className="">
-                <Link to="/products">Products</Link>
-                
-              </li>
-              <li><Link to="/contact">Contact</Link></li>
+        
+      </ul>
+      
+    </div>
+  </div>
+</nav>
 
-              {auth && JSON.parse(auth).role === 1 && (
-                <>
-                  <li><Link to="/adminAddProducts">AddProduct</Link></li>
-                  <li><Link to="/adminProductsList">Product List</Link></li>
-                  <li><Link to="/userlist">Users List</Link></li>
-                  <li><Link to="/messages">Messages</Link></li>
-                  <li><Link to="/purchaserequest">Purchase Request</Link></li>
 
-                </>
-              )}
-            </ul>
-          </div>
-        </nav>
-      </header>
+
+
+
+
+     
     </>
   );
 };
